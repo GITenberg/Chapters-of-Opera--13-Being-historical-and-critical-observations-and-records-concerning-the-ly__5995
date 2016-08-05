@@ -1,0 +1,29 @@
+_repo: Chapters-of-Opera--13-Being-historical-and-critical-observations-and-records-concerning-the-ly__5995
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Krehbiel, Henry Edward
+    alias: Krehbiel, H. E. (Henry Edward)
+    birthdate: 1854
+    deathdate: 1923
+    gutenberg_agent_id: '1296'
+    url: http://www.gutenberg.org/2009/agents/1296
+    wikipedia: http://en.wikipedia.org/wiki/Henry_Edward_Krehbiel
+description: ''
+gutenberg_bookshelf: Opera
+gutenberg_issued: '2005-05-29'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '5995'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Opera -- New York (State) -- New York'
+- !lcc 'ML'
+- GITenberg
+title: "Chapters of Opera\r\nBeing historical and critical observations and records\
+  \ concerning the lyric drama in New York from its earliest days down to the present\
+  \ time"
+url: http://www.gutenberg.org/ebooks/5995
