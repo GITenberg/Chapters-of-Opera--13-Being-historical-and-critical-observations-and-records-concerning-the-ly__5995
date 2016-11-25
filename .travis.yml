@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: gkahu3wiX2WfMpOclolHpC3At9eiwHDBK9CRf2n5vBcRBtxj2rpBt/Fp2mgop25wmHM01hnPzGD/HlyqLFsArgZs+jiBRenGi0l9yOzcMkBkp2hZSYHaY6OFHTH0BE2ZguoF5tmXiWpleYgCG6XG8FqKnygZcOhSzfBbgYuOSXfY3tPf2Yf1SRA1LjshGophEnEbVtKoEmzegt7jVBc9i76G40A8/QCoP88cnedy07w4o505s0joF9fMT5zdCnDlExfadX/aw2fh+T54i7siSKyCjwJK9QOEnCZxeJT5hx4lAubcW0paQEWTIf8Abp9xIX2skvVvjZXZMkjDal6bBp9ph/t3nwMMTRdDahbvJlC8QjbXq51gvMh4yh2wZpkNXsFxva8rMxzAuzzpYLvEE/kqyvLzgMLfxPz40TII/LxPCmv9h7kqeC14tZWjCm9aQV1hzCWYNEMGt/aLLKXmQpMH6OXLbneLk3Xvk+vFwz5sxNVMPXXFJNY80zfYNqkwCLCW0ouDALlwucm2vglsgIxyAZYWCzWvEE9aCNqJiQpd0tw0gckCuPyJvm5T4C2r78LfIQvZuZ7+nM8cj0IfLyIDq6/7FjueVWEj8oN2t8UD93MeyxqCFe12dQAYRzbMvaCvStZhhPnGmIUbN5i1yhfvYfh20/D7MKnvP2IA6Pw=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Chapters-of-Opera--13-Being-historical-and-critical-observations-and-records-concerning-the-ly__5995
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
